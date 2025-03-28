@@ -16,6 +16,10 @@ models:
       - name: transaction_date
         data_type: date
         description: ""
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date
 
       - name: account_id
         data_type: integer
@@ -26,8 +30,12 @@ models:
         description: ""
 
       - name: transaction_amount
-        data_type: varchar
+        data_type: decimal(8, 2)
         description: ""
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: decimal(8,2)
 
       - name: transaction_currency
         data_type: varchar

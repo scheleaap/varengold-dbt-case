@@ -13,7 +13,10 @@ renamed as (
         loant_type,
         interest_rate,
         loan_term,
-        strptime(approval_rejection_date, '%d.%m.%Y') as approval_rejection_date,
+        coalesce(
+            try_strptime(approval_rejection_date, '%d.%m.%Y'),
+            strptime(approval_rejection_date, '%m/%d/%Y'),
+        ) as approval_rejection_date,
         loan_status
 
     from source

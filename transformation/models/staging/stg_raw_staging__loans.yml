@@ -40,6 +40,8 @@ models:
       - name: approval_rejection_date
         data_type: date
         description: ""
+        tests:
+          - not_null
 
       - name: loan_status
         data_type: varchar
