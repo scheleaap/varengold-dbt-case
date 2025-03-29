@@ -28,9 +28,27 @@ Data problems:
 
 Thoughts on dbt:
 * data tests vs. unit tests
+    * Data tests can guarantee that your data fulfills certain requirements, while unit tests can guarantee that your transformations work correctly. Data tests are similar to data monitoring. They are not suitable to test whether your transformations work correctly unless you strictly control the input to the test.
+    * Data tests only guarantee the _current_ state of your data. They do not guarantee that your data will be correct if different input data is processed.
+      They cannot detect certain problems. For example, imagine parsing an optional date that does not conform to your parse format.
+    * What is the best strategy for a red-green development workflow?
+    * In the dev process that I followed, I tested pipelines by implementing data tests (not optimal)
+    * During data testing, errors in materialized views only become visible if dbt actually tries to read a value. This is suboptimal.
 * SQL templating 😢
+    * Refactoring
+    * Code highlighting/completion
+    * Testing
+    * SQL + Jinja + Python
 * How do you guarantee the model and its documentation are in sync?
+* How about:
+    * Use an external lineage/catalog tool, e.g. OpenLineage, Data Hub, Open Metadata, Marquez, Egeria
+    * Use Python for processing raw/staging data and for creating the data vault.
+      If possible, use it for creating the data marts etc., too.
+      For example using Polars, Spark, PyArrow.
+    * Use dbt only for transformations managed by data analysts that absolutely must work in SQL.
 * Streaming?
+* Incremental models are possible
+
 
 Interesting articles:
 * https://www.reddit.com/r/dataengineering/comments/zamewl/whats_wrong_with_dbt/
