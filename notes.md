@@ -47,6 +47,7 @@ Thoughts on dbt:
       For example using Polars, Spark, PyArrow.
     * Use dbt only for transformations managed by data analysts that absolutely must work in SQL.
     * Data Contracts + [Data Contract CLI](https://cli.datacontract.com/), useful for a [data mesh architecture](https://www.datamesh-architecture.com/)
+    * Using [Ibis](https://ibis-project.org/)?
 * Streaming?
 * Incremental models are possible
 
